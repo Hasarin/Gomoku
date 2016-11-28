@@ -14,18 +14,15 @@ public class Mouse implements MouseListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		System.out.println(e.getX() + " " + e.getY());
 		for (Coordonée c : liste) {
-			
 			  if(c.getX()-10 < e.getX() && c.getX()+10 > e.getX()){
 				  if(c.getY()-10 < e.getY() && c.getY()+10 > e.getY()){
-					  System.out.println("toucher"); } }
+					  System.out.println("toucher");
+					  
+					  }
+				  }
 			 
-			/*if (c.getX() == e.getX()) {
-				if (c.getY() == e.getY()) {
-					System.out.println("toucher" + c.getX() + " " + c.getY() + " " + e.getX()+ " "+ e.getY());
-				}
-			}*/
+			
 		}
 	}
 

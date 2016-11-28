@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 public class Plateau extends JPanel {
 
 	private Mouse mouse;
-	public List liste = new ArrayList<Coordonée>();
+	public List<Coordonée> liste = new ArrayList<Coordonée>();
 	public Plateau() {
 		this.setLayout(new GridLayout(8, 8));
 		mouse = new Mouse(liste);
@@ -29,11 +29,16 @@ public class Plateau extends JPanel {
 				Coordonée c = new Coordonée(i*40+10, y*40+10);
 				Coordonée c2 = new Coordonée(i*40+10+40, y*40+10+40);
 				g.drawRect(i * 40 + 10, y*40+10, 40, 40);
-				for (int j = 0; j < liste.size(); j++) {
-					if(c.)
+				Boolean b = false;
+				for (Coordonée coor : liste) {
+					if(c.compare(coor)){
+						b = true;
+					}
 				}
-				liste.add(c);
-				liste.add(c2);
+				if(!b){
+					liste.add(c);
+					liste.add(c2);
+				}
 			}
 		}
 		liste.add(new Coordonée(9*40+10, 9*40+10));

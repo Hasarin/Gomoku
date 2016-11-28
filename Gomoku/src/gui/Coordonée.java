@@ -26,6 +26,8 @@ public class Coordonée {
 	}
 	
 	
-	public compare
+	public boolean compare(Coordonée coord) {
+		return ((this.x == coord.getX()) && (this.y == coord.getY()));
+	}
 
 }
