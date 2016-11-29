@@ -45,7 +45,7 @@ public class Menu extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				Fenetre f = new Fenetre(slider.getValue());
+				View f = new View(slider.getValue());
                 f.setVisible(true);
 
 			}
