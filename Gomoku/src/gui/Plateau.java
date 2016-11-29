@@ -27,7 +27,7 @@ public class Plateau extends JPanel {
 		for (int i = 0; i < 10; i++) {
 			for (int y = 0; y < 10; y++) {
 				Coordonée c = new Coordonée(i*40+10, y*40+10);
-				Coordonée c2 = new Coordonée(i*40+10+40, y*40+10+40);
+				Coordonée c2 = new Coordonée(i*40+10, y*40+10+40);
 				g.drawRect(i * 40 + 10, y*40+10, 40, 40);
 				Boolean b = false;
 				for (Coordonée coor : liste) {
@@ -39,11 +39,18 @@ public class Plateau extends JPanel {
 					liste.add(c);
 					liste.add(c2);
 				}
+				
 			}
-		}
-		liste.add(new Coordonée(9*40+10, 9*40+10));
-		liste.add(new Coordonée(9*40+10+40, 9*40+10+40));
+			liste.add(new Coordonée(10*40+10, i*40+10));
+			liste.add(new Coordonée(i*40+10, 10*40+10));
+			
 
+		}
+		liste.add(new Coordonée(10*40+10, 10*40+10));
+		for (Coordonée coordonée : liste) {
+			g.fillRect(coordonée.getX()-5, coordonée.getY()-5, 10, 10);
+		}
+		
 	}
 	
 	public List getListe() {
