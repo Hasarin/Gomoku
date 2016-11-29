@@ -1,5 +1,4 @@
 import gui.GomokuController;
-import gui.Menu;
 import gui.View;
 import jeu.Couleur;
 import jeu.Joueurs;
@@ -11,10 +10,10 @@ public class Gomoku {
       Joueurs joueur1 = new Joueurs(Couleur.Blanc);
       Joueurs joueur2 = new Joueurs(Couleur.Noir);
 
-      Menu menu = new Menu();
-      //GomokuController controller = new GomokuController(joueur1, joueur2, menu);
+      View view = new View(10,joueur1,joueur2);
+      GomokuController controller = new GomokuController(joueur1, joueur2, view);
 
-     // controller.updateView();
+     
 
      
    }
