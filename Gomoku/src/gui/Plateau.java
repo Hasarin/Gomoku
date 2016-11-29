@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+import jeu.Coordonée;
+
 public class Plateau extends JPanel {
 
 	private Mouse mouse;

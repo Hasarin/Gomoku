@@ -5,6 +5,10 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.management.ListenerNotFoundException;
+
+import jeu.Coordonée;
+
 public class Mouse implements MouseListener {
 
 	private List<Coordonée> liste = new ArrayList<Coordonée>();
@@ -18,6 +22,7 @@ public class Mouse implements MouseListener {
 			  if(c.getX()-10 < e.getX() && c.getX()+10 > e.getX()){
 				  if(c.getY()-10 < e.getY() && c.getY()+10 > e.getY()){
 					  System.out.println("toucher");
+					  
 					  
 					  }
 				  }

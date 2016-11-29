@@ -1,4 +1,4 @@
-package gui;
+package jeu;
 
 public class Coordonée {
 	private int x;
