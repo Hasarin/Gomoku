@@ -8,24 +8,27 @@ import javax.swing.JPanel;
 
 public class Fenetre extends JFrame {
 	
-	public static void main(String[] args) {
-		new Fenetre();
-	}
-	
+
+	int taille;
 	private Plateau plateau;
-	public Fenetre() {
+	public Fenetre(int taille) {
+		this.taille=taille;
 		this.setTitle("Gomoku Game");
-		this.setSize(430, 450);
+		this.setSize(taille*40+50, taille*40+50);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());
 		
-		plateau = new Plateau();
+		plateau = new Plateau(taille);
 		
 		
 		
 		this.add(plateau,BorderLayout.CENTER);
 		this.setVisible(true);
+	}
+	
+	public int getTaille() {
+		return taille;
 	}
 	
 
