@@ -17,7 +17,7 @@ public class View extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());
 
-		plateau = new Plateau();
+		
 
 		this.add(plateau, BorderLayout.CENTER);
 		this.setVisible(true);
