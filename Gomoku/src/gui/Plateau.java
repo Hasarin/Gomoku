@@ -9,15 +9,15 @@ import java.util.List;
 import javax.swing.JPanel;
 
 import jeu.Coordonée;
+import jeu.Joueurs;
 
 public class Plateau extends JPanel {
 
 	private Mouse mouse;
 	public List<Coordonée> liste = new ArrayList<Coordonée>();
 	int taille ;
-	public Plateau(int taille) {
+	public Plateau(int taille, Joueurs joueur1, Joueurs joueur2) {
 		this.taille = taille;
-		this.setLayout(new GridLayout(8, 8));
 		mouse = new Mouse(liste);
 		this.addMouseListener(mouse);
 			

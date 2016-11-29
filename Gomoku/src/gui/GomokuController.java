@@ -13,8 +13,6 @@ public class GomokuController {
 		this.view = view;
 	}
 
-	public void updateView() {
-
-	}
-
+	
+	
 }
