@@ -3,8 +3,10 @@ import javax.swing.event.EventListenerList;
 public class Partie {
 	private Joueur joueur1;
 	private Joueur joueur2;
-	private int tourdejeu;
+	private int tourdejeu = 0;
 	private int taille = 0;
+	private int [][] plateau;
+	
 	
 	
 	public Partie(Joueur joueur1, Joueur joueur2) {
@@ -15,6 +17,15 @@ public class Partie {
 	
 	public Partie(int taille){
 		this.taille = taille;
+		plateau = new int[taille][taille];
+		for (int i = 0; i < plateau.length; i++) {
+			for (int j = 0; j < plateau.length; j++) {
+				plateau[i][j] = 0;
+				
+			}
+		}
+		plateau[5][4] = 1;
+		plateau[4][5] = 2;
 	}
 	
 	public Joueur getJoueur1() {
@@ -48,5 +59,16 @@ public class Partie {
 	public void setTaille(int taille) {
 		this.taille = taille;
 	}
+	
+	public int[][] getPlateau() {
+		return plateau;
+	}
+
+	public void setPlateau(int a, int b, int v) {
+		this.plateau[a][b] = v;
+	}
+
+	
+	
 	
 }
