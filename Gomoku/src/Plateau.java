@@ -1,4 +1,4 @@
-package gui;
+
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+import gui.Mouse;
 import jeu.Coordonée;
 import jeu.Joueurs;
 
