@@ -10,19 +10,15 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-import gui.Mouse;
-import jeu.Coordonée;
-import jeu.Joueurs;
 
 public class Plateau extends JPanel implements MouseListener {
 
-	private Mouse mouse;
-	public List<Coordonée> liste = new ArrayList<Coordonée>();
+	
+	public List<Coordonnée> liste = new ArrayList<Coordonnée>();
 	int taille;
 
-	public Plateau(int taille, Joueurs joueur1, Joueurs joueur2) {
-		this.taille = taille;
-
+	public Plateau(Partie partie) {
+		taille = partie.getTaille();
 		addMouseListener(this);
 
 	}
@@ -34,11 +30,11 @@ public class Plateau extends JPanel implements MouseListener {
 
 		for (int i = 0; i < taille; i++) {
 			for (int y = 0; y < taille; y++) {
-				Coordonée c = new Coordonée(i * 40 + 20, y * 40 + 10);
-				Coordonée c2 = new Coordonée(i * 40 + 20, y * 40 + 10 + 40);
+				Coordonnée c = new Coordonnée(i * 40 + 20, y * 40 + 10);
+				Coordonnée c2 = new Coordonnée(i * 40 + 20, y * 40 + 10 + 40);
 				g.drawRect(i * 40 + 20, y * 40 + 10, 40, 40);
 				Boolean b = false;
-				for (Coordonée coor : liste) {
+				for (Coordonnée coor : liste) {
 					if (c.compare(coor)) {
 						b = true;
 					}
@@ -49,13 +45,13 @@ public class Plateau extends JPanel implements MouseListener {
 				}
 
 			}
-			liste.add(new Coordonée(taille * 40 + 20, i * 40 + 10));
-			liste.add(new Coordonée(i * 40 + 20, taille * 40 + 10));
+			liste.add(new Coordonnée(taille * 40 + 20, i * 40 + 10));
+			liste.add(new Coordonnée(i * 40 + 20, taille * 40 + 10));
 
 		}
-		liste.add(new Coordonée(taille * 40 + 20, taille * 40 + 10));
-		for (Coordonée coordonée : liste) {
-			g.fillRect(coordonée.getX() - 5, coordonée.getY() - 5, 10, 10);
+		liste.add(new Coordonnée(taille * 40 + 20, taille * 40 + 10));
+		for (Coordonnée Coordonnée : liste) {
+			g.fillRect(Coordonnée.getX() - 5, Coordonnée.getY() - 5, 10, 10);
 		}
 		
 
@@ -67,7 +63,7 @@ public class Plateau extends JPanel implements MouseListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		for (Coordonée c : liste) {
+		for (Coordonnée c : liste) {
 			if (c.getX() - 10 < e.getX() && c.getX() + 10 > e.getX()) {
 				if (c.getY() - 10 < e.getY() && c.getY() + 10 > e.getY()) {
 					
