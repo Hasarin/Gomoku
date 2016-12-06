@@ -8,7 +8,10 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JWindow;
 
 
 public class Plateau extends JPanel implements MouseListener {
@@ -57,19 +60,27 @@ public class Plateau extends JPanel implements MouseListener {
 		for (int i = 0; i < partie.getPlateau().length; i++) {
 			for (int j = 0; j < partie.getPlateau().length; j++) {
 				if(partie.getPlateau()[i][j] == 1){
-					System.out.println("lol");
+					if(gagner() == true){
+						JOptionPane jo = new JOptionPane();
+						int reply = jo.showConfirmDialog(null,"rejouer ?", "Gagner", JOptionPane.YES_NO_OPTION);
+						if(reply == JOptionPane.NO_OPTION)
+							System.exit(0);
+					}
 					g.setColor(Color.WHITE);
 					g.fillOval(i*40 +10, j*40, 20, 20);
 				}
 				if(partie.getPlateau()[i][j]==2){
+					if(gagner() == true){
+						JOptionPane jo = new JOptionPane();
+						int reply = jo.showConfirmDialog(null,"rejouer ?", "Gagner", JOptionPane.YES_NO_OPTION);
+						if(reply == JOptionPane.NO_OPTION)
+							System.exit(0);						
+					}
 					g.setColor(Color.BLACK);
 					g.fillOval(i*40 +10, j*40, 20, 20);
 				}
 			}
 		}
-	
-		
-
 	}
 	
 
@@ -82,7 +93,7 @@ public class Plateau extends JPanel implements MouseListener {
 			if (c.getX() - 10 < e.getX() && c.getX() + 10 > e.getX()) {
 				if (c.getY() - 10 < e.getY() && c.getY() + 10 > e.getY()) {		
 					
-					getGraphics().fillOval(c.getX() - 10, c.getY() - 10, 20, 20);
+					//getGraphics().fillOval(c.getX() - 10, c.getY() - 10, 20, 20);
 					if(partie.getTourdejeu()%2 == 0){
 						partie.getPlateau()[(c.getX()-10)/40][c.getY()/40] = 1;
 						partie.setTourdejeu(partie.getTourdejeu()+1);
@@ -96,8 +107,66 @@ public class Plateau extends JPanel implements MouseListener {
 		}
 		repaint();
 	}
+	
+	
+	public boolean gagner(){
+		for (int i = 0; i < partie.getPlateau().length; i++) {
+			for (int j = 0; j < partie.getPlateau().length; j++) {
+				if(partie.getPlateau()[i][j] == 1){
+					if(checkVertical(i,j,1) || checkHorizon(i, j, 1) || checkVertiHB(i, j, 1) || checkVertiBH(i, j, 1)){
+						return true;
+					}
+				}
+				if(partie.getPlateau()[i][j] == 2){
+					if(checkVertical(i,j,2) || checkHorizon(i, j, 2) || checkVertiHB(i, j, 2) || checkVertiBH(i, j, 2)){
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+		
+	}
 
 	
+	
+
+	private boolean checkVertical(int i,int j,int joueur) {
+		int check = partie.getPlateau()[i][j];
+		for (int k = 0; k < 5; k++) {
+			if(partie.getPlateau()[i][j+k] != joueur){
+				return false;
+			}
+		}
+		return true;
+	}
+	private boolean checkHorizon(int i,int j,int joueur) {
+		int check = partie.getPlateau()[i][j];
+		for (int k = 0; k < 5; k++) {
+			if(partie.getPlateau()[i+k][j] != joueur){
+				return false;
+			}
+		}
+		return true;
+	}
+	private boolean checkVertiHB(int i,int j,int joueur) {
+		int check = partie.getPlateau()[i][j];
+		for (int k = 0; k < 5; k++) {
+			if(partie.getPlateau()[i+k][j+k] != joueur){
+				return false;
+			}
+		}
+		return true;
+	}
+	private boolean checkVertiBH(int i,int j,int joueur) {
+		int check = partie.getPlateau()[i][j];
+		for (int k = 0; k < 5; k++) {
+			if(partie.getPlateau()[i+1][j-k] != joueur){
+				return false;
+			}
+		}
+		return true;
+	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {

@@ -17,7 +17,7 @@ public class Partie {
 	
 	public Partie(int taille){
 		this.taille = taille;
-		plateau = new int[taille][taille];
+		plateau = new int[taille+1][taille+1];
 		for (int i = 0; i < plateau.length; i++) {
 			for (int j = 0; j < plateau.length; j++) {
 				plateau[i][j] = 0;
