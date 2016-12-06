@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 
-public class MenuView extends JeuView {
+public class MenuView extends JeuView implements ActionListener {
 
 
 	public JFrame frame;
@@ -17,6 +17,7 @@ public class MenuView extends JeuView {
 	public JPanel panel2;
 	public JButton bouton1;
 	public JSlider slider;
+	
 
 	public MenuView(JeuController controller) {
 		super(controller);
@@ -39,6 +40,7 @@ public class MenuView extends JeuView {
 		panel1 = new JPanel();
 		
 		bouton1 = new JButton("Game");
+		bouton1.addActionListener(this);
 		slider = new JSlider(3, 15);
 		slider.setMajorTickSpacing(5);
 		slider.setMinorTickSpacing(1);
@@ -47,22 +49,13 @@ public class MenuView extends JeuView {
 		frame.getContentPane().add(bouton1, BorderLayout.SOUTH);
 		frame.getContentPane().add(slider);
 
-		bouton1.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				//frame.setVisible(false);
-				getController().MenuView.close();
-				
-
-			}
-		});
+		
 		
 	}
 
 	@Override
 	public void jeuChanged(JeuListenerEvent event) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
@@ -76,6 +69,16 @@ public class MenuView extends JeuView {
 	public void close() {
 		// TODO Auto-generated method stub
 		frame.dispose();
+	}
+
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		getController().closeMenuView();
+		getController().notifyJeuChanged(new Partie(slider.getValue()));
+		System.out.println(slider.getValue());
+		getController().displayPlateauView();
 	}
 
 }
