@@ -16,6 +16,7 @@ public class Plateau extends JPanel implements MouseListener {
 	
 	public List<Coordonnée> liste = new ArrayList<Coordonnée>();
 	Partie partie;
+	
 
 	public Plateau(Partie partie) {
 		this.partie = partie;
@@ -51,20 +52,18 @@ public class Plateau extends JPanel implements MouseListener {
 
 		}
 		liste.add(new Coordonnée(partie.getTaille() * 40 + 20, partie.getTaille() * 40 + 10));
-		for (Coordonnée Coordonnée : liste) {
-			g.fillRect(Coordonnée.getX() - 5, Coordonnée.getY() - 5, 10, 10);
-		}
-		if(partie.getTourdejeu()%2==0){
-			g.setColor(Color.white);
-			
-		}else{
-			g.setColor(Color.BLACK);
-		}
+		
 		
 		for (int i = 0; i < partie.getPlateau().length; i++) {
 			for (int j = 0; j < partie.getPlateau().length; j++) {
-				if(partie.getPlateau()[i][j]==1){
-					getGraphics().fillOval(i*40 +20, j*40+10, 20, 20);
+				if(partie.getPlateau()[i][j] == 1){
+					System.out.println("lol");
+					g.setColor(Color.WHITE);
+					g.fillOval(i*40 +10, j*40, 20, 20);
+				}
+				if(partie.getPlateau()[i][j]==2){
+					g.setColor(Color.BLACK);
+					g.fillOval(i*40 +10, j*40, 20, 20);
 				}
 			}
 		}
@@ -81,16 +80,21 @@ public class Plateau extends JPanel implements MouseListener {
 	public void mouseClicked(MouseEvent e) {
 		for (Coordonnée c : liste) {
 			if (c.getX() - 10 < e.getX() && c.getX() + 10 > e.getX()) {
-				if (c.getY() - 10 < e.getY() && c.getY() + 10 > e.getY()) {
-				
-					getGraphics().fillOval(c.getX() - 10, c.getY() - 10, 20, 20);
+				if (c.getY() - 10 < e.getY() && c.getY() + 10 > e.getY()) {		
 					
-						
-
+					getGraphics().fillOval(c.getX() - 10, c.getY() - 10, 20, 20);
+					if(partie.getTourdejeu()%2 == 0){
+						partie.getPlateau()[(c.getX()-10)/40][c.getY()/40] = 1;
+						partie.setTourdejeu(partie.getTourdejeu()+1);
+					}
+					else{
+						partie.getPlateau()[(c.getX()-10)/40][c.getY()/40] = 2;
+						partie.setTourdejeu(partie.getTourdejeu()+1);
+					}
 				}
 			}
-
 		}
+		repaint();
 	}
 
 	
