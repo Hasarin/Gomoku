@@ -65,7 +65,9 @@ public class Plateau extends JPanel implements MouseListener {
 						int reply = jo.showConfirmDialog(null,"rejouer ?", "Gagner", JOptionPane.YES_NO_OPTION);
 						if(reply == JOptionPane.NO_OPTION)
 							System.exit(0);
-					}
+						if(reply == JOptionPane.YES_OPTION)
+							liste.clear();
+						}
 					g.setColor(Color.WHITE);
 					g.fillOval(i*40 +10, j*40, 20, 20);
 				}
@@ -94,6 +96,7 @@ public class Plateau extends JPanel implements MouseListener {
 				if (c.getY() - 10 < e.getY() && c.getY() + 10 > e.getY()) {		
 					
 					//getGraphics().fillOval(c.getX() - 10, c.getY() - 10, 20, 20);
+					if(partie.getPlateau()[(c.getX()-10)/40][c.getY()/40]== 0){
 					if(partie.getTourdejeu()%2 == 0){
 						partie.getPlateau()[(c.getX()-10)/40][c.getY()/40] = 1;
 						partie.setTourdejeu(partie.getTourdejeu()+1);
@@ -101,6 +104,7 @@ public class Plateau extends JPanel implements MouseListener {
 					else{
 						partie.getPlateau()[(c.getX()-10)/40][c.getY()/40] = 2;
 						partie.setTourdejeu(partie.getTourdejeu()+1);
+					}
 					}
 				}
 			}
@@ -132,17 +136,25 @@ public class Plateau extends JPanel implements MouseListener {
 	
 
 	private boolean checkVertical(int i,int j,int joueur) {
-		int check = partie.getPlateau()[i][j];
-		for (int k = 0; k < 5; k++) {
-			if(partie.getPlateau()[i][j+k] != joueur){
-				return false;
-			}
+		
+			int check = partie.getPlateau()[i][j];
+			for (int k = 0; k < 5; k++) {
+				if(j+k == 10){
+					return false;
+				}
+				if(partie.getPlateau()[i][j+k] != joueur){
+					return false;
+				}
+			
 		}
 		return true;
 	}
 	private boolean checkHorizon(int i,int j,int joueur) {
 		int check = partie.getPlateau()[i][j];
 		for (int k = 0; k < 5; k++) {
+			if(i+k == 10){
+				return false;
+			}
 			if(partie.getPlateau()[i+k][j] != joueur){
 				return false;
 			}
@@ -152,6 +164,9 @@ public class Plateau extends JPanel implements MouseListener {
 	private boolean checkVertiHB(int i,int j,int joueur) {
 		int check = partie.getPlateau()[i][j];
 		for (int k = 0; k < 5; k++) {
+			if(j+k == 10 || i+k == 10){
+				return false;
+			}
 			if(partie.getPlateau()[i+k][j+k] != joueur){
 				return false;
 			}
@@ -161,6 +176,9 @@ public class Plateau extends JPanel implements MouseListener {
 	private boolean checkVertiBH(int i,int j,int joueur) {
 		int check = partie.getPlateau()[i][j];
 		for (int k = 0; k < 5; k++) {
+			if(j-k == 0 || i+k == 10){
+				return false;
+			}
 			if(partie.getPlateau()[i+1][j-k] != joueur){
 				return false;
 			}
